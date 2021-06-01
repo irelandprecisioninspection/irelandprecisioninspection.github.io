@@ -3,7 +3,7 @@
 <head>
   
   <meta charset='utf-8'>
-  <meta name="viewport" content="width=device-width, initial-scale=1" id="wixDesktopViewport" />
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1" id="wixDesktopViewport" /> -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <base href="https://irelandprecisioninspections.com">
   
@@ -604,13 +604,17 @@ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+
 
 <p class="font_8" style="line-height:1.88em;font-size:15px"><span style="font-weight:bold">Service Areas:</span></p>
 
-<p class="font_8" style="line-height:1.88em;font-size:15px">Martin County, Palm Beach County, Saint Lucie County, Indian River County, Okeechobee County, Glades County &amp; Highlands County.</p></div>
+<p class="font_8" style="line-height:1.88em;font-size:15px">Martin County, Palm Beach County, Saint Lucie County, Indian River County, Okeechobee County, Glades County & Highlands County.
+<br><br>
+Stuart, FL 34996
+<br><br>
+irelandprecisioninspectionsllc@gmail.com
+<br><br>
+(707) 410-8243      Ryan Ireland
+<br><br>
+(707) 410-8301       Robert Ireland
+</p></div>
 
-<div id="comp-jnodc99v7" class="_1Z_nJ" data-testid="richTextElement">
-<p class="font_8" style="text-align:left;font-size:15px">
-<object height="0">
-
-</object></p></div>
 <div id="comp-jnodc99v8" class="_1Z_nJ" data-testid="richTextElement">
 
 </div></div></div></div>
@@ -630,97 +634,106 @@ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+
   
 <script>
   
-    function validateForm() {
-      // console.log("Validated")
-      var fname = document.forms["gform"]["fname"].value;
-      var lname = document.forms["gform"]["lname"].value;
-      var email = document.forms["gform"]["email"].value;
-      
-      if (fname == "" || lname == "" || email == "") {
-        return false;
+function validateForm() {
+  // console.log("Validated")
+  var fname = document.forms["gform"]["fname"].value;
+  var lname = document.forms["gform"]["lname"].value;
+  var email = document.forms["gform"]["email"].value;
+  
+  if (fname == "" || lname == "" || email == "") {
+    return false;
+  }
+  // console.log("Validation success");
+}
+
+function loadIntoHiddenForm() {
+  // console.log("loaded")
+  var fname = document.forms["gform"]["fname"].value;
+  var lname = document.forms["gform"]["lname"].value;
+  var email = document.forms["gform"]["email"].value;
+  var phone = document.forms["gform"]["phone"].value;
+  var address = document.forms["gform"]["address"].value;
+  var subject = document.forms["gform"]["subject"].value;
+  var message = document.forms["gform"]["message"].value;
+
+  document.forms["hiddenForm"]["entry.1433467774"].value = fname;
+  document.forms["hiddenForm"]["entry.1559435383"].value = lname;
+  document.forms["hiddenForm"]["entry.1146035858"].value = email;
+  document.forms["hiddenForm"]["entry.1507715792"].value = phone;
+  document.forms["hiddenForm"]["entry.1714856688"].value = address;
+  document.forms["hiddenForm"]["entry.364438619"].value = subject;
+  document.forms["hiddenForm"]["entry.1352765182"].value = message;
+  // console.log(document.forms["hiddenForm"]["entry.1352765182"].value);
+}
+
+function submitHiddenFormData() {
+  // console.log("submitted")
+  document.getElementById("bingo").click();
+}
+
+function resetThePrettyForm() {
+  // console.log("reset")
+  document.forms["gform"].reset();
+}
+
+function thanksMsg() {
+  // console.log("thanks")
+  var fname = document.forms["hiddenForm"]["entry.1433467774"].value;
+  document.getElementById("ThanksForSubmitting").innerHTML = "Thanks for submitting us a request " + fname + "!";
+}
+
+</script>
+
+<!-- When I hit submit, I want to copy the form data from the first form to the fields in the hidden form, and then submit
+that hidden form, and then clear the showing form -->
+
+<!-- I can try storing the values in a second form and then send that form off while clearing out the first form 
+I will need to reset the second form before I load new values into it. -->
+<!-- target="hidden_iframe" -->
+
+
+
+
+<form name="hiddenForm" id="hiddenForm" enctype="text/plain" action="https://docs.google.com/forms/d/e/1FAIpQLSd8qlyydcpKzLpemibonVal70ftzRpbMPAuU5xzXTJiU2ypwQ/formResponse?"  target="hidden_iframe_hello" onsubmit="resetThePrettyForm();"> 
+<input type="hidden" name="entry.1433467774" id="entry.1433467774"/>
+<input type="hidden" name="entry.1559435383" id="entry.1559435383"/>
+<input type="hidden" name="entry.1146035858" id="entry.1146035858"/>
+<input type="hidden" name="entry.1507715792" id="entry.1507715792"/>
+<input type="hidden" name="entry.1714856688" id="entry.1714856688"/>
+<input type="hidden" name="entry.364438619" id="entry.364438619"/>
+<input type="hidden" name="entry.1352765182" id="entry.1352765182"/>
+<input type="submit" value="Submit" id="bingo" style="display: none;"/>
+</form>
+
+<iframe name="hidden_iframe_hello" id="hidden_iframe_hello" style="display:none;"></iframe>
+
+<!-- This form did not submit anything when I used a return before validateForm()!!! -->
+
+
+
+
+
+
+<!-- </div> -->
+
+<!-- <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe> -->
+  
+  
+
+
+
+
+<!-- https://stackoverflow.com/questions/1009808/enter-key-press-behaves-like-a-tab-in-javascript -->
+<script>
+  document.addEventListener('keydown', function (event) {
+      if (event.keyCode === 13 && event.target.nodeName === 'INPUT') {
+        var form = event.target.form;
+        var index = Array.prototype.indexOf.call(form, event.target);
+        form.elements[index + 1].focus();
+        event.preventDefault();
       }
-      // console.log("Validation success");
-    }
-    
-    function loadIntoHiddenForm() {
-      // console.log("loaded")
-      var fname = document.forms["gform"]["fname"].value;
-      var lname = document.forms["gform"]["lname"].value;
-      var email = document.forms["gform"]["email"].value;
-      var phone = document.forms["gform"]["phone"].value;
-      var address = document.forms["gform"]["address"].value;
-      var subject = document.forms["gform"]["subject"].value;
-      var message = document.forms["gform"]["message"].value;
-    
-      document.forms["hiddenForm"]["entry.1433467774"].value = fname;
-      document.forms["hiddenForm"]["entry.1559435383"].value = lname;
-      document.forms["hiddenForm"]["entry.1146035858"].value = email;
-      document.forms["hiddenForm"]["entry.1507715792"].value = phone;
-      document.forms["hiddenForm"]["entry.1714856688"].value = address;
-      document.forms["hiddenForm"]["entry.364438619"].value = subject;
-      document.forms["hiddenForm"]["entry.1352765182"].value = message;
-      // console.log(document.forms["hiddenForm"]["entry.1352765182"].value);
-    }
-    
-    function submitHiddenFormData() {
-      // console.log("submitted")
-      document.getElementById("bingo").click();
-    }
-    
-    function resetThePrettyForm() {
-      // console.log("reset")
-      document.forms["gform"].reset();
-    }
-    
-    function thanksMsg() {
-      // console.log("thanks")
-      var fname = document.forms["hiddenForm"]["entry.1433467774"].value;
-      document.getElementById("ThanksForSubmitting").innerHTML = "Thanks for submitting us a request " + fname + "!";
-    }
-    
-    </script>
-    
-    <!-- When I hit submit, I want to copy the form data from the first form to the fields in the hidden form, and then submit
-    that hidden form, and then clear the showing form -->
-    
-    <!-- I can try storing the values in a second form and then send that form off while clearing out the first form 
-    I will need to reset the second form before I load new values into it. -->
-    <!-- target="hidden_iframe" -->
-  
-  
-  
-  
-    <form name="hiddenForm" id="hiddenForm" enctype="text/plain" action="https://docs.google.com/forms/d/e/1FAIpQLSd8qlyydcpKzLpemibonVal70ftzRpbMPAuU5xzXTJiU2ypwQ/formResponse?"  target="hidden_iframe_hello" onsubmit="resetThePrettyForm();"> 
-    <input type="hidden" name="entry.1433467774" id="entry.1433467774"/>
-    <input type="hidden" name="entry.1559435383" id="entry.1559435383"/>
-    <input type="hidden" name="entry.1146035858" id="entry.1146035858"/>
-    <input type="hidden" name="entry.1507715792" id="entry.1507715792"/>
-    <input type="hidden" name="entry.1714856688" id="entry.1714856688"/>
-    <input type="hidden" name="entry.364438619" id="entry.364438619"/>
-    <input type="hidden" name="entry.1352765182" id="entry.1352765182"/>
-    <input type="submit" value="Submit" id="bingo" style="display: none;"/>
-    </form>
-    
-    <iframe name="hidden_iframe_hello" id="hidden_iframe_hello" style="display:none;"></iframe>
-    
-    <!-- This form did not submit anything when I used a return before validateForm()!!! -->
-  
-  
-  
-  
-  
-  
-  <!-- </div> -->
-  
-  <!-- <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe> -->
-  
-  
-
-
-
-
-
-
+    });
+  </script>
 
 
 
@@ -734,82 +747,77 @@ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+
 
 
 <div id="comp-jnodc99v9" class="_1HpZ_">
-    <div id="bgLayers_comp-jnodc99v9" class="_3_wbk">
-    <div data-testid="colorUnderlay" class="P0kib FgquG"></div>
-    <div id="bgMedia_comp-jnodc99v9" class="_33YMf"></div></div>
-    <div data-mesh-id="comp-jnodc99v9inlineContent" data-testid="inline-content" class="">
-    <div data-mesh-id="comp-jnodc99v9inlineContent-gridContainer" data-testid="mesh-container-content">
-    <div id="comp-k67ye2r1" class="_3e89g">
-    <div data-mesh-id="comp-k67ye2r1inlineContent" data-testid="inline-content" class="">
-    <div data-mesh-id="comp-k67ye2r1inlineContent-gridContainer" data-testid="mesh-container-content">
-    
-    <form name="gform" id="gform" class="Cdk9j" enctype="text/plain" target="hidden_iframe" onsubmit="validateForm(); loadIntoHiddenForm(); thanksMsg(); submitHiddenFormData();">
-    <div data-mesh-id="comp-k67ye2r9inlineContent" data-testid="inline-content" class="">
-    <div data-mesh-id="comp-k67ye2r9inlineContent-gridContainer" data-testid="mesh-container-content">
+<div id="bgLayers_comp-jnodc99v9" class="_3_wbk">
+<div data-testid="colorUnderlay" class="P0kib FgquG"></div>
+<div id="bgMedia_comp-jnodc99v9" class="_33YMf"></div></div>
+<div data-mesh-id="comp-jnodc99v9inlineContent" data-testid="inline-content" class="">
+<div data-mesh-id="comp-jnodc99v9inlineContent-gridContainer" data-testid="mesh-container-content">
+<div id="comp-k67ye2r1" class="_3e89g">
+<div data-mesh-id="comp-k67ye2r1inlineContent" data-testid="inline-content" class="">
+<div data-mesh-id="comp-k67ye2r1inlineContent-gridContainer" data-testid="mesh-container-content">
+
+<form name="gform" id="gform" class="Cdk9j" enctype="text/plain" target="hidden_iframe" onsubmit="validateForm(); loadIntoHiddenForm(); thanksMsg(); submitHiddenFormData();">
+<div data-mesh-id="comp-k67ye2r9inlineContent" data-testid="inline-content" class="">
+<div data-mesh-id="comp-k67ye2r9inlineContent-gridContainer" data-testid="mesh-container-content">
+
+
+<div id="comp-k67ye2rl" class="_31qkb _1uYgo PEjbJ">
+<label for="input_comp-k67ye2rl" class="_2UrhM">First Name</label>
+<div class="Lc5OM">
+<input type="text" name="fname" id="input_comp-k67ye2rl" class="A1_tY has-custom-focus" value="" placeholder="" required="" maxLength="100" autocorrect="off" autocapitalize=words/></div></div>
+
+
+<div id="comp-k67ye2rz" class="_31qkb _1uYgo PEjbJ">
+<label for="input_comp-k67ye2rz" class="_2UrhM">Last Name</label>
+<div class="Lc5OM">
+<input type="text" name="lname" id="input_comp-k67ye2rz" class="A1_tY has-custom-focus" value="" placeholder="" required="" maxLength="100" autocorrect="off" autocapitalize=words/></div></div>
+
+
+<div id="comp-k67ye2rt" class="_31qkb _1uYgo PEjbJ">
+<label for="input_comp-k67ye2rt" class="_2UrhM">Email</label>
+<div class="Lc5OM">
+<input type="email" name="email" id="input_comp-k67ye2rt" class="A1_tY has-custom-focus" value="" placeholder="" required="" pattern="^.+@.+\.[a-zA-Z]{2,63}$" maxLength="250" autocorrect="off"/></div></div>
+
+
+<div id="comp-k67ye2s6" class="_31qkb _1uYgo">
+<label for="input_comp-k67ye2s6" class="_2UrhM">Phone</label>
+<div class="Lc5OM">
+<input type="tel" name="phone" id="input_comp-k67ye2s6" class="A1_tY has-custom-focus" value="" placeholder="" maxLength="50" autocorrect="off"/></div></div>
+
+
+<div id="comp-k67ye2sd" class="_31qkb _1uYgo">
+<label for="input_comp-k67ye2sd" class="_2UrhM">Address</label>
+<div class="Lc5OM">
+<input type="text" name="address" id="input_comp-k67ye2sd" class="A1_tY has-custom-focus" value="" placeholder="" maxLength="250" autocorrect="off"/></div>
   
-  
-    <div id="comp-k67ye2rl" class="_31qkb _1uYgo PEjbJ">
-    <label for="input_comp-k67ye2rl" class="_2UrhM">First Name</label>
-    <div class="Lc5OM">
-    <input type="text" name="fname" id="input_comp-k67ye2rl" class="A1_tY has-custom-focus" value="" placeholder="" required="" maxLength="100"/></div></div>
-  
-  
-    <div id="comp-k67ye2rz" class="_31qkb _1uYgo PEjbJ">
-    <label for="input_comp-k67ye2rz" class="_2UrhM">Last Name</label>
-    <div class="Lc5OM">
-    <input type="text" name="lname" id="input_comp-k67ye2rz" class="A1_tY has-custom-focus" value="" placeholder="" required="" maxLength="100"/></div></div>
-  
-  
-    <div id="comp-k67ye2rt" class="_31qkb _1uYgo PEjbJ">
-    <label for="input_comp-k67ye2rt" class="_2UrhM">Email</label>
-    <div class="Lc5OM">
-    <input type="email" name="email" id="input_comp-k67ye2rt" class="A1_tY has-custom-focus" value="" placeholder="" required="" pattern="^.+@.+\.[a-zA-Z]{2,63}$" maxLength="250"/></div></div>
-  
-  
-    <div id="comp-k67ye2s6" class="_31qkb _1uYgo">
-    <label for="input_comp-k67ye2s6" class="_2UrhM">Phone</label>
-    <div class="Lc5OM">
-    <input type="tel" name="phone" id="input_comp-k67ye2s6" class="A1_tY has-custom-focus" value="" placeholder="" maxLength="50"/></div></div>
-  
-  
-    <div id="comp-k67ye2sd" class="_31qkb _1uYgo">
-    <label for="input_comp-k67ye2sd" class="_2UrhM">Address</label>
-    <div class="Lc5OM">
-    <input type="text" name="address" id="input_comp-k67ye2sd" class="A1_tY has-custom-focus" value="" placeholder="" maxLength="250"/></div>
-      
-    <br> <br>
-    
-    <div id="comp-k67ye2sd" class="_31qkb _1uYgo">
-    <label for="input_comp-k67ye2sd2" class="_2UrhM">Subject</label>
-    <div class="Lc5OM">
-    <input type="text" name="subject" id="input_comp-k67ye2sd2" class="A1_tY has-custom-focus" value="" placeholder=""/></div></div>
-    </div>
-  
-    <div id="comp-k67ye2sk" class="_42POZ _2ugKu">
-    <label for="textarea_comp-k67ye2sk" class="_2SAi8">Type your message here...</label>
-    <textarea name="message" id="textarea_comp-k67ye2sk" class="_1qIig has-custom-focus" placeholder=""> 
-    </textarea>
-    </div>
-    
-    <div id="comp-k67ye2sr" aria-disabled="false" class="_22oPj">
-      <button data-testid="buttonElement" class="_1_kc0">
-      <span class="_3fUtn">Submit</span>
-      </button>
-      </div>
-      
-      <div id="comp-kbae93ll" class="_1Z_nJ" data-testid="richTextElement"><p class="font_8" style="text-align:center;font-size:15px">
-    
-        <p class="font_8" id="ThanksForSubmitting" style="text-align:center;font-size:15px">
-          
-      <span class="color_11" id="ThanksForSubmittingSPAN"></span>
-    </p>
-    </p></div>
-    </div></div>
-    </form>
-    
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-    
-    </div></div></div></div></div></div></div></section></div></div></div></div></div></div></div></main>
+<br> <br>
+
+<div id="comp-k67ye2sd" class="_31qkb _1uYgo">
+<label for="input_comp-k67ye2sd2" class="_2UrhM">Subject</label>
+<div class="Lc5OM">
+<input type="text" name="subject" id="input_comp-k67ye2sd2" class="A1_tY has-custom-focus" value="" placeholder=""/></div></div>
+</div>
+
+<div id="comp-k67ye2sk" class="_42POZ _2ugKu">
+<label for="textarea_comp-k67ye2sk" class="_2SAi8">Type your message here...</label>
+<textarea name="message" id="textarea_comp-k67ye2sk" class="_1qIig has-custom-focus" placeholder=""> 
+</textarea>
+</div>
+
+<div id="comp-k67ye2sr" aria-disabled="false" class="_22oPj">
+<button data-testid="buttonElement" class="_1_kc0">
+<span class="_3fUtn">Submit</span>
+</button>
+</div>
+
+<div id="comp-kbae93ll" class="_1Z_nJ" data-testid="richTextElement"><p class="font_8" style="text-align:center;font-size:15px">
+<p class="font_8" id="ThanksForSubmitting" style="text-align:center;font-size:15px">    
+<span class="color_11" id="ThanksForSubmittingSPAN"></span>
+</p></p></div></div></div></form>
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+</div></div></div></div></div></div></div></section></div></div></div></div></div></div></div></main>
 
     
 
